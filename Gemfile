@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -33,12 +33,33 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'bootstrap-sass', '3.3.6'
+
+gem 'rails-controller-testing'
+
+gem 'bcrypt', '3.1.11'
+
+gem "jquery-rails"
+
+gem 'faker', '1.6.6'
+
+# gem 'carrierwave',             '0.11.2'
+# gem 'carrierwave'
+# gem 'mini_magick',             '4.5.1'
+# gem 'mini_magick'
+# gem 'fog',                     '1.38.0'
+
+gem 'will_paginate',           '3.1.0'
+
+gem 'bootstrap-will_paginate', '0.0.10'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'sqlite3', '1.3.11'
 end
 
 group :development do
@@ -48,6 +69,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :production do
+  gem 'pg', '0.18.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
