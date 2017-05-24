@@ -8,7 +8,7 @@ class DepartmentTest < ActiveSupport::TestCase
 
   test 'department_name presence' do
     @department.department_name = ''
-    @department.valid?
+    assert_not @department.valid?
   end
 
 end
