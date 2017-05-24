@@ -1,2 +1,21 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<% provide(:title, 'All users') %>
+<h1>ユーザー一覧</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <% @users.each do |user| %>
+    <%=link_to user.name + '(' + user.department.department_name + ')', user_path(user) %>
+      <%= link_to '編集', edit_user_path(user) %>
+      <!-- 管理者のみ表示する処理 -->
+      <%= link_to '削除', user, method: :delete,
+                    data: { confirm: "You sure?" } %>
+
+      <br>
+  <% end %>
+</ul>
+
+<!-- 管理者のみ表示する処理 -->
+<%= link_to '新規登録', new_user_path, class: "btn btn-lg btn-primary" %>
+
+<%= will_paginate %>
