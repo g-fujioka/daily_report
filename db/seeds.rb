@@ -1,4 +1,5 @@
 Department.create!(department_name: "development")
+Department.create!(department_name: "planning")
 
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
@@ -17,3 +18,5 @@ User.create!(name:  "Example User",
                password_confirmation: password,
                department_id: 1)
 end
+
+Report.create!(report_date: '2017-04-01', title: 'Hello', content: 'こんにちは', user_id: 1)
