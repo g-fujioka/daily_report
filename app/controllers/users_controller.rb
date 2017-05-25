@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @reports = Report.where(params[:id]).paginate(page: params[:page])
   end
 
   def new

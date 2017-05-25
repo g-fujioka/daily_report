@@ -1,4 +1,8 @@
 <h1>
-  <%= @user.name %>の日報
+  <%= @user.name %>の日報一覧
 </h1>
+
+<% @reports.each do |report| %>
+  <%= link_to report.report_date, report_path(report) %>
+<% end %>
 

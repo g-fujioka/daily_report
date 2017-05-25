@@ -1,0 +1,7 @@
+<h1><%= @report.report_date %>の日報</h1>
+タイトル：<%= @report.title %><br>
+内容：<%= @report.content %><br>
+<!-- コメントとコメントフォーム -->
+<% @comments.each do |comment| %>
+  コメント：<%= comment.content %><br>
+<% end %>
