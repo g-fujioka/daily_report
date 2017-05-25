@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  has_many :reports
+  has_many :reports, dependent: :destroy
+  has_many :comments
   belongs_to :department
+
 
   validates :name, presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
