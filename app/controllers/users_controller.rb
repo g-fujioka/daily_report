@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   # 正しいユーザーか確認
   def correct_user
     @user = User.find(params[:id])
-    unless current_user?(@user)
+    unless current_user?(@user) || admin_user?(current_user)
       redirect_to request.referrer || home_url
       flash[:info] = '正しいユーザーではありません'
     end

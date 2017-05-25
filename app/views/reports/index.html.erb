@@ -1,5 +1,11 @@
 <h1>ホーム</h1>
-<% @reports.each do |report| %>
-  ユーザー名：<%= link_to report.user.name, user_path(report.user) %>
-  タイトル：  <%= link_to report.title, report_path(report) %><br>
+<table border="1" class="report-link">
+  <tr><th>ユーザー名</th><th>日付</th><th>タイトル</th></tr>
+  <% @reports.each do |report| %>
+    <tr>
+      <td><%= link_to report.user.name, user_path(report.user) %></td>
+      <td><%= link_to report.report_date, report_path(report) %></td>
+      <td><%= link_to report.title, report_path(report) %></td>
+    </tr>
 <% end %>
+</table>

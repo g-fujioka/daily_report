@@ -9,7 +9,8 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
-    @comments = Comment.all.where(report_id: params[:id])
+    @comments = Comment.where(report_id: params[:id])
+    @comment = Comment.new
   end
 
   def new

@@ -8,12 +8,3 @@
     <% end %>
   </div>
 </div>
-
-<table border="1">
-  <tr><th>部署ID</th><th>部署名</th></tr>
-  <% @departments.each do |department| %>
-  <tr>
-    <td><%= department.id %></td><td><%= department.department_name %></td>
-  </tr>
-  <% end %>
-</table>
