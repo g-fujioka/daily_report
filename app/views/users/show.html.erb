@@ -1,8 +1,16 @@
-<h1>
-  <%= @user.name %>の日報一覧
-</h1>
+<h1><%= @user.name %></h1>
 
-<% @reports.each do |report| %>
-  <%= link_to report.report_date, report_path(report) %>
+メールアドレス：<%= @user.email %><br>
+部署名：<%= @user.department.department_name %><br>
+
+<% if current_user?(@user) || admin_user?(current_user) %>
+    <%= link_to '編集', edit_user_path(@user) %>
 <% end %>
+
+<!-- 管理者のみ表示する処理 -->
+<% if admin_user?(current_user) %>
+<%= link_to '削除', @user, method: :delete,
+            data: { confirm: "You sure?" } %>
+<% end %>
+
 

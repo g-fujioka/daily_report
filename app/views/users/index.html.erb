@@ -5,18 +5,13 @@
 
 <ul class="users">
   <% @users.each do |user| %>
-    <%=link_to user.name + '(' + user.department.department_name + ')', user_path(user) %>
-      <%= link_to '編集', edit_user_path(user) %>
-      <!-- 管理者のみ表示する処理 -->
-      <%= link_to '削除', user, method: :delete,
-                    data: { confirm: "You sure?" } %>
-
-      <br>
+    <%=link_to user.name + '(' + user.department.department_name + ')', user_path(user) %><br>
   <% end %>
-  <!-- 管理者のみ表示する処理 -->
-  <%= link_to '新規登録', new_user_path, class: "btn btn-lg btn-primary" %>
 </ul>
 
-
+<!-- 管理者のみ表示する処理 -->
+<% if admin_user?(current_user) %>
+<%= link_to '新規登録', new_user_path, class: "btn btn-lg btn-primary" %>
+<% end %>
 
 <%= will_paginate %>

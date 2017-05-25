@@ -4,14 +4,11 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:michael)
+    @other = users(:archer)
   end
 
-  test "should get new" do
-    get new_report_path
-    assert_response :success
-  end
-
-  test "report create" do
+  test "report create and destroy" do
+    log_in_as(@user)
     get new_report_path
     assert_difference 'Report.count', 1 do
     post reports_path params: { report: { report_date: '2017-04-01',
@@ -20,7 +17,13 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
                                           user_id: @user.id
                                         }}
     end
-  assert_not flash.empty?
-  assert_redirected_to reports_url
+    report = assigns(:report)
+    assert_not flash.empty?
+    assert_redirected_to report
+    assert_difference 'Report.count', -1 do
+      delete report_path(report)
+    end
+    assert_not flash.empty?
+    assert_redirected_to home_url
   end
 end

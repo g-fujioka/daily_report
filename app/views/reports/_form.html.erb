@@ -1,14 +1,14 @@
 <%= render 'shared/error_messages', object: @report %>
 
 <%= f.label :report_date %>
-<%= f.date_field :report_date, class: 'form-control' %>
+<%= f.date_field :report_date, value: Time.now.strftime("%Y-%m-%d"), class: 'form-control' %>
 
 <%= f.label :title %>
 <%= f.text_field :title, class: 'form-control' %>
 
-<%= f.label :content%>
+<%= f.label :content %>
 <%= f.text_area :content, class: 'form-control' %>
 
-<!-- hiddenでuserIDを渡す処理 -->
+<%= f.hidden_field :user_id, value: current_user.id %>
 
 <%= f.submit yield(:button_text), class: "btn btn-primary" %>

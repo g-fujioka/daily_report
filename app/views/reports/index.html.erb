@@ -1,0 +1,5 @@
+<h1>ホーム</h1>
+<% @reports.each do |report| %>
+  ユーザー名：<%= link_to report.user.name, user_path(report.user) %>
+  タイトル：  <%= link_to report.title, report_path(report) %><br>
+<% end %>

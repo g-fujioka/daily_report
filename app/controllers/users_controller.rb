@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
-  before_action :user_find, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :log_in?, only: [:index, :show]
+  before_action :admin_user, only: [:new, :create, :destroy]
+
 
   def index
     @users = User.paginate(page: params[:page])
   end
 
   def show
-    @reports = Report.where(params[:id]).paginate(page: params[:page])
+    @user = User.find(params[:id])
+    @reports = @user.reports.paginate(page: params[:page])
   end
 
   def new
@@ -40,6 +44,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
     flash[:success] = "User deleted"
     redirect_to users_url
@@ -52,8 +57,13 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :department_id, :password, :password_confirmation)
   end
 
-  def user_find
+  # 正しいユーザーか確認
+  def correct_user
     @user = User.find(params[:id])
+    unless current_user?(@user)
+      redirect_to request.referrer || home_url
+      flash[:info] = '正しいユーザーではありません'
+    end
   end
 
 end

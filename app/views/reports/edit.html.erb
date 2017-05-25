@@ -1,0 +1,10 @@
+<% provide(:title, 'Edit report') %>
+<% provide(:button_text, '更新する') %>
+<h1>Update your report</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@report) do |f| %>
+        <%= render 'form', {f: f} %>
+    <% end %>
+  </div>
+</div>
