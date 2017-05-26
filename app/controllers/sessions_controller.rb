@@ -12,7 +12,6 @@ class SessionsController < ApplicationController
       flash.now[:danger] = t('errors.messages.invalid_login')
       render 'sessions/new'
     end
-
   end
 
   def destroy

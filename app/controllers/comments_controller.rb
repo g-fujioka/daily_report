@@ -7,8 +7,7 @@ class CommentsController < ApplicationController
       flash[:success] = t('info.post')
       redirect_to report_url(@comment.report)
     else
-      redirect_to home_url
-      #　redirect_to 直前のページにリダイレクト
+      redirect_to root_url
     end
 
   end
@@ -27,8 +26,9 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content, :report_id, :user_id)
   end
 
+  # 正しいユーザー確認
   def correct_user
     @comment = current_user.comments.find_by(id: params[:id])
-    redirect_to home_url if @comment.nil?
+    redirect_to root_url if @comment.nil?
   end
 end

@@ -4,12 +4,13 @@
 <%= t('activerecord.attributes.user.email') + @user.email %><br>
 <%= t('activerecord.models.department') +  @user.department.department_name %><br>
 
+
 <% if current_user?(@user) || admin_user?(current_user) %>
     <%= link_to t('helpers.submit.edit'), edit_user_path(@user) %>
 <% end %>
 
 <!-- 管理者のみ表示する処理 -->
-<% if admin_user?(current_user) %>
+<% if admin_user?(current_user) && !(current_user?(@user)) %>
 <%= link_to t('helpers.submit.delete'), @user, method: :delete,
             data: { confirm: t('info.delete') } %>
 <% end %>

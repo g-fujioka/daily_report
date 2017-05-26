@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # 管理者ユーザーか確認
   def admin_user
     unless admin_user?(current_user)
       redirect_to request.referrer || root_url

@@ -2,7 +2,6 @@ class ReportsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :log_in?, only:[:index, :show]
 
-
   def index
     @reports = Report.all.paginate(page: params[:page])
   end
@@ -54,7 +53,6 @@ class ReportsController < ApplicationController
 
   def correct_user
     @report = current_user.reports.find_by(id: params[:id])
-    redirect_to home_url if @report.nil?
+    redirect_to root_url if @report.nil?
   end
-
 end
