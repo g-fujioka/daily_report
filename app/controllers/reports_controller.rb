@@ -22,7 +22,7 @@ class ReportsController < ApplicationController
       flash[:info] = t('info.post')
       redirect_to @report
     else
-      return_back
+      render 'reports/new'
     end
   end
 

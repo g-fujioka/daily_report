@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
       flash[:success] = t('info.post')
       redirect_to report_url(@comment.report)
     else
+      flash[:danger] = @comment.errors.full_messages.join
       return_back
     end
 

@@ -11,7 +11,7 @@
 
 <!-- 管理者のみ表示する処理 -->
 <% if admin_user?(current_user) && !(current_user?(@user)) %>
-  <%= link_to t('helpers.submit.delete'), @user, method: :delete, data: { confirm: t('info.delete') } %>
+  <%= link_to t('helpers.submit.delete'), @user, method: :delete, data: { confirm: t('info.delete?') } %>
 <% end %>
 
 
