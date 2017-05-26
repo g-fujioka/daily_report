@@ -2,16 +2,19 @@
 <h1><%= t('title.users') %></h1>
 
 <%= will_paginate @users, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
-
-<ul class="users">
-  <% @users.each do |user| %>
-    <%=link_to user.name + '(' + user.department.department_name + ')', user_path(user) %><br>
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th><%= t('activerecord.models.user') + '(' + t('activerecord.models.department') + ')' %></th>
+      </tr>
+    </thead>
+    <% @users.each do |user| %>
+      <tr><td><%=link_to user.name + '(' + user.department.department_name + ')', user_path(user) %></td></tr>
+    <% end %>
+  </table>
+  <% if admin_user?(current_user) %>
+    <%= link_to t('title.new_user'), new_user_path, class: "btn btn-lg btn-primary" %>
   <% end %>
-</ul>
-
-
-<% if admin_user?(current_user) %>
-  <%= link_to t('button.new'), new_user_path, class: "btn btn-lg btn-primary" %>
-<% end %>
-
+</div>
 <%= will_paginate @users, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>

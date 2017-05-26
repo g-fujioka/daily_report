@@ -1,31 +1,37 @@
 <% provide(:title, t('activerecord.models.report')) %>
 
 <h1><%= @report.user.name + t('activerecord.models.report')%></h1>
-<table border="1">
-  <tr><td><%= t('activerecord.attributes.report.report_date')%></td><td><%= @report.report_date %></td></tr>
+<div class="container">
+  <table class="table">
+  <tr><th><%= t('activerecord.attributes.report.report_date')%></th><td><%= @report.report_date %></td></tr>
   <tr><td><%= t('activerecord.attributes.report.title') %></td><td><%= @report.title %></td></tr>
   <tr><td><%= t('activerecord.attributes.report.content') %></td><td><%= @report.content %></td></tr>
-</table>
-<% if current_user?(@report.user) %>
-  <%= link_to t('helpers.submit.edit'), edit_report_path %>
-  <%= link_to t('helpers.submit.delete'), @report, method: :delete, data: { confirm: t('info.delete?') } %>
-<% end %>
+    <% if current_user?(@report.user) %>
+      <td><%= link_to t('helpers.submit.edit'), edit_report_path %>
+          <%= link_to t('helpers.submit.delete'), @report, method: :delete, data: { confirm: t('info.delete?') } %></td>
+      <td></td>
+    <% end %>
+  </table>
+</div>
 
-<table border="1" class="comment-table">
-<!-- コメントとコメントフォーム -->
-  <tr><th><%= t('activerecord.models.user') %></th><th><%= t('activerecord.models.comment') %></th></tr>
-  <% @comments.each do |comment| %>
-    <tr>
-      <td><%= comment.user.name %></td>
-      <td><%= comment.content %></td>
-      <td>
-        <% if current_user?(comment.user) %>
-          <%= link_to t('helpers.submit.delete'), comment, method: :delete %><br>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+
+<div class="container">
+  <table class="table table-bordered">
+  <!-- コメントとコメントフォーム -->
+    <tr><th><%= t('activerecord.models.user') %></th><th><%= t('activerecord.models.comment') %></th><th></th></tr>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.user.name %></td>
+        <td><%= comment.content %></td>
+        <td>
+          <% if current_user?(comment.user) %>
+              <%= link_to t('helpers.submit.delete'), comment, method: :delete %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
 <% unless current_user?(@report.user) %>
   <%= form_for(@comment) do |f| %>
