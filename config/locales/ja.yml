@@ -52,6 +52,7 @@ ja:
     delete?: 削除してもよろしいですか
     post: 投稿しました
     update: 更新しました
+    error : エラー
 
   paginate:
     next: 次>>
@@ -158,7 +159,6 @@ ja:
       year: 年
   errors:
     format: "%{attribute}%{message}"
-    content: エラー内容
     messages:
       accepted: を受諾してください
       admin: 管理者ではありません
@@ -174,6 +174,7 @@ ja:
       greater_than_or_equal_to: は%{count}以上の値にしてください
       inclusion: は一覧にありません
       invalid: は不正な値です
+      invalid_login: メールアドレス、または、パスワードが違います
       less_than: は%{count}より小さい値にしてください
       less_than_or_equal_to: は%{count}以下の値にしてください
       login: ログインしてください

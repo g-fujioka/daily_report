@@ -33,7 +33,7 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update_attributes(report_params)
-      flash[:success] = 'Report updated'
+      flash[:success] = t('info.update')
       redirect_to @report
     else
       render 'reports/edit'
@@ -42,7 +42,7 @@ class ReportsController < ApplicationController
 
   def destroy
     @report.destroy
-    flash[:success] = '削除しました'
+    flash[:success] = t('info.delete')
     redirect_to root_url
   end
 
