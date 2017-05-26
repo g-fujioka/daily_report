@@ -11,7 +11,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get login_path
     assert_template 'sessions/new'
     log_in_as(@admin_user)
-    assert_redirected_to home_url
+    assert_redirected_to root_url
   end
 
 end

@@ -24,7 +24,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     # 管理者でないユーザーは無効
     get new_user_path
-    assert_redirected_to request.referrer || home_url
+    assert_redirected_to request.referrer || root_url
     assert_not flash.empty?
   end
 
