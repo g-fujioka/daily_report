@@ -8,13 +8,54 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     models:
+      user: ユーザー
       report: 日報
+      comment: コメント
+      department: 部署
     attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード再確認
+        department_id: 部署名
+
       report:
         user_id: ユーザー
         report_date: 報告日
         title: タイトル
         content: 内容
+
+      comment:
+        user_id: ユーザー
+        report_id: 日報
+        content: コメント
+
+      department:
+        department_name: 部署名
+
+  title:
+    system_name: 日報システム
+    home: ホーム
+    daily_post: 日報投稿
+    users: ユーザー一覧
+    logout: ログアウト
+    user_update: ユーザー編集
+    login: ログイン
+    new_report: 新規投稿
+    new_user: 新規登録
+    report_update: 日報編集
+
+  info:
+    create: 登録しました
+    delete: 削除しました
+    delete?: 削除してもよろしいですか
+    post: 投稿しました
+    update: 更新しました
+
+  paginate:
+    next: 次>>
+    previous: <<前
 
   date:
     abbr_day_names:
@@ -117,8 +158,11 @@ ja:
       year: 年
   errors:
     format: "%{attribute}%{message}"
+    content: エラー内容
     messages:
       accepted: を受諾してください
+      admin: 管理者ではありません
+      correct_user: 正しいユーザーではありません
       blank: を入力してください
       present: は入力しないでください
       confirmation: と%{attribute}の入力が一致しません
@@ -132,6 +176,7 @@ ja:
       invalid: は不正な値です
       less_than: は%{count}より小さい値にしてください
       less_than_or_equal_to: は%{count}以下の値にしてください
+      login: ログインしてください
       model_invalid: "バリデーションに失敗しました: %{errors}"
       not_a_number: は数値で入力してください
       not_an_integer: は整数で入力してください
@@ -151,9 +196,15 @@ ja:
     select:
       prompt: 選択してください
     submit:
+      comment: コメントする
       create: 登録する
+      edit: 編集
+      delete: 削除
+      login: ログインする
+      post: 投稿する
       submit: 保存する
       update: 更新する
+
   number:
     currency:
       format:

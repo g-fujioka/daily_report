@@ -17,15 +17,15 @@
     <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
     <% end %>
-    <%= link_to "日報システム", root_path, id: "logo" %>
+    <%= link_to t('title.system_name'), root_path, id: "logo" %>
     <% if logged_in? %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to current_user.name, current_user %></li>
-        <li><%= link_to "ホーム",   root_path %></li>
-        <li><%= link_to "日報投稿",   new_report_path %></li>
-        <li><%= link_to "ユーザー一覧", users_path %></li>
-        <li><%= link_to "ログアウト", logout_path, method: 'delete' %></li>
+        <li><%= link_to t('title.home'),   root_path %></li>
+        <li><%= link_to t('title.daily_post'),   new_report_path %></li>
+        <li><%= link_to t('title.users'), users_path %></li>
+        <li><%= link_to t('title.logout'), logout_path, method: 'delete' %></li>
       </ul>
     </nav>
     <% end %>

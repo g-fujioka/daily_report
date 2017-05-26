@@ -1,6 +1,6 @@
-<% provide(:title, 'Edit report') %>
-<% provide(:button_text, '更新する') %>
-<h1>Update your report</h1>
+<% provide(:title, t('title.report_update')) %>
+<% provide(:button_text, t('helpers.submit.update')) %>
+<h1><%= t('title.report_update') %></h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@report) do |f| %>

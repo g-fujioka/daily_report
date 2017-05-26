@@ -20,7 +20,7 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     if @report.save
-      flash[:info] = "日報を投稿しました"
+      flash[:info] = t('info.post')
       redirect_to @report
     else
       render 'reports/new'

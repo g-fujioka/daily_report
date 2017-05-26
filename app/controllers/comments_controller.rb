@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      flash[:success] = 'コメントを投稿しました'
+      flash[:success] = t('info.post')
       redirect_to report_url(@comment.report)
     else
       redirect_to home_url
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @report = Report.find_by(id: @comment.report_id)
     @comment.destroy
-    flash[:success] = 'コメントを削除しました'
+    flash[:success] = t('info.delete')
     redirect_to @report
   end
 

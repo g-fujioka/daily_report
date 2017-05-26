@@ -8,14 +8,14 @@ class ApplicationController < ActionController::Base
   def log_in?
     unless logged_in?
     redirect_to(login_url)
-    flash[:info] = 'ログインしてください'
+    flash[:info] = t('errors.messages.login')
     end
   end
 
   def admin_user
     unless admin_user?(current_user)
       redirect_to request.referrer || home_url
-      flash[:info] = '管理者ではありません'
+      flash[:info] = t('errors.messages.admin')
     end
   end
 end

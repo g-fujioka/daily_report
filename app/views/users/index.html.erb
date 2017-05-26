@@ -1,7 +1,7 @@
-<% provide(:title, 'All users') %>
-<h1>ユーザー一覧</h1>
+<% provide(:title, t('title.users')) %>
+<h1><%= t('title.users') %></h1>
 
-<%= will_paginate %>
+<%= will_paginate @users, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
 
 <ul class="users">
   <% @users.each do |user| %>
@@ -9,9 +9,9 @@
   <% end %>
 </ul>
 
-<!-- 管理者のみ表示する処理 -->
+
 <% if admin_user?(current_user) %>
-<%= link_to '新規登録', new_user_path, class: "btn btn-lg btn-primary" %>
+<%= link_to t('button.new'), new_user_path, class: "btn btn-lg btn-primary" %>
 <% end %>
 
-<%= will_paginate %>
+<%= will_paginate @users, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
