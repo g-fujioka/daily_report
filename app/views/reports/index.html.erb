@@ -12,7 +12,7 @@
       <td><%= report.report_date %></td>
       <td><%= link_to report.title, report_path(report) %></td>
     </tr>
-<% end %>
+  <% end %>
 </table>
 
 <%= will_paginate @reports, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>

@@ -54,6 +54,9 @@ ja:
     update: 更新しました
     error : エラー
 
+  link:
+    back: <<戻る
+
   paginate:
     next: 次>>
     previous: <<前

@@ -11,7 +11,7 @@
 
 
 <% if admin_user?(current_user) %>
-<%= link_to t('button.new'), new_user_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to t('button.new'), new_user_path, class: "btn btn-lg btn-primary" %>
 <% end %>
 
 <%= will_paginate @users, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>

@@ -1,3 +1,4 @@
+<% provide(:title, t('activerecord.models.report')) %>
 <% provide(:button_text, t('helpers.submit.comment')) %>
 
 <h1><%= @report.user.name + t('activerecord.models.report')%></h1>
@@ -7,25 +8,28 @@
   <tr><td><%= t('activerecord.attributes.report.content') %></td><td><%= @report.content %></td></tr>
 </table>
 <% if current_user?(@report.user) %>
-<%= link_to t('helpers.submit.edit'), edit_report_path %>   <%= link_to t('helpers.submit.delete'), @report, method: :delete,
-            data: { confirm: t('info.delete?') } %><br>
+  <%= link_to t('helpers.submit.edit'), edit_report_path %>
+  <%= link_to t('helpers.submit.delete'), @report, method: :delete, data: { confirm: t('info.delete?') } %>
 <% end %>
+
 <table border="1" class="comment-table">
 <!-- コメントとコメントフォーム -->
   <tr><th><%= t('activerecord.models.user') %></th><th><%= t('activerecord.models.comment') %></th></tr>
-<% @comments.each do |comment| %>
-  <tr>
-    <td><%= comment.user.name %></td>
-    <td><%= comment.content %></td>
-    <td>    <% if current_user?(comment.user) %>
+  <% @comments.each do |comment| %>
+    <tr>
+      <td><%= comment.user.name %></td>
+      <td><%= comment.content %></td>
+      <td>
+        <% if current_user?(comment.user) %>
           <%= link_to t('helpers.submit.delete'), comment, method: :delete %><br>
-      <% end %></td>
-  </tr>
-<% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
 </table>
 
 <% unless current_user?(@report.user) %>
-<%= form_for(@comment) do |f| %>
+  <%= form_for(@comment) do |f| %>
 
     <%= render 'shared/error_messages', object: @comment %>
 
@@ -37,5 +41,7 @@
     <%= f.hidden_field :user_id, value: current_user.id %>
 
     <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <% end %>
 <% end %>
-<% end %>
+
+<%= link_to t('link.back'), root_path %>

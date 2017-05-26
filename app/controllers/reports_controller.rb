@@ -22,7 +22,7 @@ class ReportsController < ApplicationController
       flash[:info] = t('info.post')
       redirect_to @report
     else
-      render 'reports/new'
+      return_back
     end
   end
 

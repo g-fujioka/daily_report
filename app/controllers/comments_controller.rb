@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
       flash[:success] = t('info.post')
       redirect_to report_url(@comment.report)
     else
-      redirect_to root_url
+      return_back
     end
 
   end
