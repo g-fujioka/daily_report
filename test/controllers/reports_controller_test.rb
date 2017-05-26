@@ -24,6 +24,6 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
       delete report_path(report)
     end
     assert_not flash.empty?
-    assert_redirected_to home_url
+    assert_redirected_to root_url
   end
 end

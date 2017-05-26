@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def admin_user
     unless admin_user?(current_user)
-      redirect_to request.referrer || home_url
+      redirect_to request.referrer || root_url
       flash[:info] = '管理者ではありません'
     end
   end
