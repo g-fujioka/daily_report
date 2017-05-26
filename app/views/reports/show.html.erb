@@ -1,5 +1,4 @@
 <% provide(:title, t('activerecord.models.report')) %>
-<% provide(:button_text, t('helpers.submit.comment')) %>
 
 <h1><%= @report.user.name + t('activerecord.models.report')%></h1>
 <table border="1">
@@ -40,7 +39,7 @@
 
     <%= f.hidden_field :user_id, value: current_user.id %>
 
-    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <%= f.submit class: "btn btn-primary" %>
   <% end %>
 <% end %>
 
