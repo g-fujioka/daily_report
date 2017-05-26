@@ -1,19 +1,19 @@
-    <%= render 'shared/error_messages', object: @user %>
+<%= render 'shared/error_messages', object: @user %>
 
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control' %>
+<%= f.label :name %>
+<%= f.text_field :name, class: 'form-control' %>
 
-    <%= f.label :email %>
-    <%= f.email_field :email, class: 'form-control' %>
+<%= f.label :email %>
+<%= f.email_field :email, class: 'form-control' %>
 
-    <%= f.label :department_id %>
-    <%= f.select(:department_id, Department.all.map{|u| [u.department_name, u.id]}, {}, {class: 'form-control'}) %>
+<%= f.label :department_id %>
+<%= f.select(:department_id, Department.all.map{|u| [u.department_name, u.id]}, {}, {class: 'form-control'}) %>
 
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control' %>
+<%= f.label :password %>
+<%= f.password_field :password, class: 'form-control' %>
 
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, class: 'form-control' %>
+<%= f.label :password_confirmation %>
+<%= f.password_field :password_confirmation, class: 'form-control' %>
 
-    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<%= f.submit class: "btn btn-primary" %>
 

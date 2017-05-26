@@ -4,11 +4,11 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      flash[:success] = 'コメントを投稿しました'
+      flash[:success] = t('info.post')
       redirect_to report_url(@comment.report)
     else
-      redirect_to home_url
-      #　redirect_to 直前のページにリダイレクト
+      flash[:danger] = @comment.errors.full_messages.join
+      return_back
     end
 
   end
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @report = Report.find_by(id: @comment.report_id)
     @comment.destroy
-    flash[:success] = 'コメントを削除しました'
+    flash[:success] = t('info.delete')
     redirect_to @report
   end
 
@@ -27,8 +27,9 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content, :report_id, :user_id)
   end
 
+  # 正しいユーザー確認
   def correct_user
     @comment = current_user.comments.find_by(id: params[:id])
-    redirect_to home_url if @comment.nil?
+    redirect_to root_url if @comment.nil?
   end
 end

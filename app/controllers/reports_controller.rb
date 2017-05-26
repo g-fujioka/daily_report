@@ -2,7 +2,6 @@ class ReportsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :log_in?, only:[:index, :show]
 
-
   def index
     @reports = Report.all.paginate(page: params[:page])
   end
@@ -20,7 +19,7 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     if @report.save
-      flash[:info] = "日報を投稿しました"
+      flash[:info] = t('info.post')
       redirect_to @report
     else
       render 'reports/new'
@@ -33,7 +32,7 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update_attributes(report_params)
-      flash[:success] = 'Report updated'
+      flash[:success] = t('info.update')
       redirect_to @report
     else
       render 'reports/edit'
@@ -42,7 +41,7 @@ class ReportsController < ApplicationController
 
   def destroy
     @report.destroy
-    flash[:success] = '削除しました'
+    flash[:success] = t('info.delete')
     redirect_to root_url
   end
 
@@ -54,7 +53,6 @@ class ReportsController < ApplicationController
 
   def correct_user
     @report = current_user.reports.find_by(id: params[:id])
-    redirect_to home_url if @report.nil?
+    redirect_to root_url if @report.nil?
   end
-
 end

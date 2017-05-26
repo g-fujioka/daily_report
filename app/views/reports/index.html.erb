@@ -1,11 +1,18 @@
-<h1>ホーム</h1>
+<% provide(:title, t('title.home')) %>
+<h1><%= t('title.home') %></h1>
 <table border="1" class="report-link">
-  <tr><th>ユーザー名</th><th>日付</th><th>タイトル</th></tr>
+  <tr>
+    <th><%= t('activerecord.models.user') %></th>
+    <th><%= t('activerecord.attributes.report.report_date') %></th>
+    <th><%= t('activerecord.attributes.report.title') %></th>
+  </tr>
   <% @reports.each do |report| %>
     <tr>
       <td><%= link_to report.user.name, user_path(report.user) %></td>
       <td><%= report.report_date %></td>
       <td><%= link_to report.title, report_path(report) %></td>
     </tr>
-<% end %>
+  <% end %>
 </table>
+
+<%= will_paginate @reports, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
