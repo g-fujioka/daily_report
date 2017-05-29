@@ -3,10 +3,10 @@ class CommentsController < ApplicationController
 
   def create
     @report = Report.find(params[:report_id])
-    @comment = @report.comments.build(comment_params)
-    if @comment.save
+    @report.comments.build(comment_params)
+    if @report.save
       flash[:success] = t('info.post')
-      redirect_to report_url(params[:report_id])
+      redirect_to @report
     else
       flash[:danger] = @report.comments.last.errors.full_messages.join
       return_back
