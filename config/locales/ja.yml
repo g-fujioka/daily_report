@@ -19,6 +19,7 @@ ja:
         password: パスワード
         password_confirmation: パスワード再確認
         department_id: 部署名
+        admin: 管理者
 
       report:
         user_id: ユーザー
