@@ -27,7 +27,7 @@
         <td><%= comment.content %></td>
         <td>
           <% if current_user?(comment.user) %>
-              <%= link_to t('helpers.submit.delete'), comment, method: :delete %><br>
+              <%= link_to t('helpers.submit.delete'), [@report, comment], method: :delete %><br>
           <% end %>
         </td>
       </tr>
@@ -36,14 +36,12 @@
 </div>
 
 <% unless current_user?(@report.user) %>
-  <%= form_for(@comment) do |f| %>
+  <%= form_for([@report, @comment]) do |f| %>
 
     <%= render 'shared/error_messages', object: @comment %>
 
     <%= f.label :content %>
     <%= f.text_area :content, class: 'form-control' %>
-
-    <%= f.hidden_field :report_id, value: @report.id %>
 
     <%= f.hidden_field :user_id, value: current_user.id %>
 
