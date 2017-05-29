@@ -15,5 +15,10 @@
 <%= f.label :password_confirmation %>
 <%= f.password_field :password_confirmation, class: 'form-control' %>
 
+<% if admin_user?(current_user) %>
+    <%= f.label :admin %>
+    <%= f.check_box :admin, {class: 'checkbox'}, false, true %>
+<% end %>
+
 <%= f.submit class: "btn btn-primary" %>
 
