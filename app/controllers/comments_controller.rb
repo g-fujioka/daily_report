@@ -3,9 +3,10 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+    @comment.report_id = params[:report_id]
     if @comment.save
       flash[:success] = t('info.post')
-      redirect_to report_url(@comment.report)
+      redirect_to report_url(params[:report_id])
     else
       flash[:danger] = @comment.errors.full_messages.join
       return_back
@@ -15,7 +16,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @report = Report.find_by(id: @comment.report_id)
+    @report = Report.find_by(id: params[:report_id])
     @comment.destroy
     flash[:success] = t('info.delete')
     redirect_to @report
