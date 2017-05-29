@@ -2,13 +2,13 @@ class CommentsController < ApplicationController
   before_action :correct_user, only: [:edit, :destroy]
 
   def create
-    @comment = Comment.new(comment_params)
-    @comment.report_id = params[:report_id]
+    @report = Report.find(params[:report_id])
+    @comment = @report.comments.build(comment_params)
     if @comment.save
       flash[:success] = t('info.post')
       redirect_to report_url(params[:report_id])
     else
-      flash[:danger] = @comment.errors.full_messages.join
+      flash[:danger] = @report.comments.last.errors.full_messages.join
       return_back
     end
 
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @report = Report.find_by(id: params[:report_id])
+    @report = Report.find(params[:report_id])
     @comment.destroy
     flash[:success] = t('info.delete')
     redirect_to @report
