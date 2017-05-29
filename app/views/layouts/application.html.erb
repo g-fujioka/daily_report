@@ -10,30 +10,41 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
     </script>
     <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-        <%= link_to t('title.system_name'), root_path, id: "logo" %>
-        <% if logged_in? %>
-          <nav>
-            <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to current_user.name, current_user %></li>
-              <li><%= link_to t('title.home'),   root_path %></li>
-              <li><%= link_to t('title.daily_post'),   new_report_path %></li>
-              <li><%= link_to t('title.users'), users_path %></li>
-              <li><%= link_to t('title.logout'), logout_path, method: 'delete' %></li>
-            </ul>
-          </nav>
-        <% end %>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+        <%= link_to  t('title.system_name'), root_path, id: "logo",  :class => "navbar-brand" %>
+      <% if logged_in? %>
+        <div class="navbar-header">
+          <button type="button" aria-controls="navbarEexample8" aria-expanded="false"
+                  class="navbar-toggle collapsed"data-toggle="collapse"data-target="#navbarEexample8">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbarEexample8">
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to current_user.name, current_user %></li>
+            <li><%= link_to t('title.home'), root_path %></li>
+            <li><%= link_to t('title.daily_post'), new_report_path %></li>
+            <li><%= link_to t('title.users'), users_path %></li>
+            <li><%= link_to t('title.logout'), logout_path, method: 'delete' %></li>
+          </ul>
+        </div>
+      <% end %>
       </div>
-    </header>
-  <div class="container">
-    <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
-    <% end %>
-    <%= yield %>
-    <%= debug(params) if Rails.env.development? %>
-  </div>
+    </nav>
+    <div class="container">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+      <%= yield %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
   </body>
 </html>
