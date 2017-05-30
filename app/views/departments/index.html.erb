@@ -7,7 +7,6 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th><%= t('activerecord.attributes.department.id') %></th>
         <th><%= t('activerecord.attributes.department.department_name') %></th>
         <th><%= t('activerecord.attributes.department.state') %></th>
         <th></th>
@@ -17,7 +16,6 @@
 
     <% @departments.each do |department| %>
       <tr>
-        <td><%= department.id %></td>
         <td><%= department.department_name %></td>
         <% if department.activate? %>
           <td class="active"><%= t('activerecord.attributes.department.activate') %></td>
