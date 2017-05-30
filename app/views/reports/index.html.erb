@@ -2,11 +2,16 @@
 <h1><%= t('title.home') %></h1>
 
 <%= search_form_for @q do |f| %>
+  <%= f.label :user_id %>
+  <%= f.search_field :user_name_cont, class:'form-control' %>
+
   <%= f.label :report_date %>
-  <%= f.search_field :report_date_eq %>
+  <%= f.search_field :report_date_cont, class:'form-control' %>
 
-<%= f.submit %>
+  <%= f.label :title %>
+  <%= f.search_field :title_cont, class:'form-control' %>
 
+  <%= f.submit class: "btn btn-primary"%>
 <% end %>
 
 <div class="container">

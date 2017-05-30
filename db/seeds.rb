@@ -20,11 +20,12 @@ User.create!(name:  "Example User",
 end
 
 Report.create!(report_date: '2017-04-01', title: 'Hello', content: 'こんにちは', user_id: 1)
-#users = User.order(:created_at).take(6)
-# 50.times do |n|
-#  n = n % 10
-#  report_date = "2017-04-0#{n}"
-#  title = Faker::Cat.breed
-#  content = Faker::Lorem.sentence(5)
-#  users.each { |user| user.reports.create!(report_date: report_date, title: title,
-#                                            content: content, user_id: user.id) }
+users = User.order(:created_at).take(50)
+report_date = Date.today
+  users.each do |user|
+      report_date = report_date.tomorrow
+      title = Faker::Cat.breed
+      content = Faker::Lorem.sentence(5)
+    user.reports.create!(report_date: report_date, title: title, content: content)
+  end
+
