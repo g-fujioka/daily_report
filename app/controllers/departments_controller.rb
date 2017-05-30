@@ -1,4 +1,5 @@
 class DepartmentsController < ApplicationController
+  before_action :log_in?
   before_action :admin_user
 
   def index
