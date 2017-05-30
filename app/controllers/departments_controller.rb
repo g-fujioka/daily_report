@@ -1,4 +1,5 @@
 class DepartmentsController < ApplicationController
+  before_action :admin_user
 
   def index
     @departments = Department.paginate(page: params[:page])
@@ -28,7 +29,7 @@ class DepartmentsController < ApplicationController
       flash[:success] = t('info.update')
       redirect_to departments_url
     else
-    render 'departments/edit'
+      render 'departments/edit'
     end
   end
 

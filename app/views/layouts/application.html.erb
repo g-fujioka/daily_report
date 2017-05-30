@@ -33,6 +33,9 @@
             <li><%= link_to t('title.home'), root_path %></li>
             <li><%= link_to t('title.daily_post'), new_report_path %></li>
             <li><%= link_to t('title.users'), users_path %></li>
+            <% if admin_user?(current_user) %>
+              <li><%= link_to t('title.departments'), departments_path %></li>
+            <% end %>
             <li><%= link_to t('title.logout'), logout_path, method: 'delete' %></li>
           </ul>
         </div>
