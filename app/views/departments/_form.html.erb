@@ -3,11 +3,7 @@
 <%= f.label :department_name %>
 <%= f.text_field :department_name, class: 'form-control' %>
 
-<% if admin_user?(current_user) %>
-  <label class="checkbox-inline">
-    <%= f.check_box :state, {class: 'checkbox'}, :activate, :invalidate %>
-    <%= f.label :state %>
-  </label>
-<% end %>
+<%= f.label :state %>
+<%= f.select(:state, Department.states_i18n.invert, {}, {class: 'form-control'}) %>
 
 <%= f.submit class: "btn btn-primary" %>

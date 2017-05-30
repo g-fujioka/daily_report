@@ -1,5 +1,10 @@
 ---
 ja:
+  enums:
+    department:
+      state:
+        activate: 有効
+        invalidate: 無効
   activerecord:
     errors:
       messages:
@@ -35,8 +40,7 @@ ja:
       department:
         id: 部署ID
         department_name: 部署名
-        state: 有効化
-        status: 状態
+        state: 状態
         activate: 有効
         invalidate: 無効
 
