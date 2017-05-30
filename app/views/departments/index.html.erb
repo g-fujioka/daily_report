@@ -1,0 +1,39 @@
+<% provide(:title, t('activerecord.models.department')) %>
+
+<h1><%= t('title.departments') %></h1>
+
+<%= will_paginate @departments, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th><%= t('activerecord.attributes.department.id') %></th>
+      <th><%= t('activerecord.attributes.department.department_name') %></th>
+      <th><%= t('activerecord.attributes.department.status') %></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <% @departments.each do |department| %>
+      <tr>
+        <td><%= department.id %></td>
+        <td><%= department.department_name %></td>
+        <% if department.activate? %>
+          <td class="active"><%= t('activerecord.attributes.department.activate') %></td>
+        <% else %>
+          <td class="danger"><%= t('activerecord.attributes.department.invalidate') %></td>
+        <% end %>
+        <td><%= link_to t('helpers.submit.edit'), edit_department_path(department) %></td>
+        <td><%= link_to t('helpers.submit.delete'), department, method: :delete,
+                data: { confirm: t('info.delete?') } %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <% if admin_user?(current_user) %>
+    <%= link_to t('title.new'), new_department_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
+</div>
+
+<%= will_paginate @departments, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>

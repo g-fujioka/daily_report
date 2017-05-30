@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170529082141) do
     t.string "department_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "state"
+    t.boolean "state"
   end
 
   create_table "reports", force: :cascade do |t|

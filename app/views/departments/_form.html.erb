@@ -1,0 +1,17 @@
+<%= render 'shared/error_messages', object: @department %>
+
+<%= f.label :department_name %>
+<%= f.text_field :department_name, class: 'form-control' %>
+
+<% if admin_user?(current_user) %>
+  <label class="checkbox-inline">
+    <%= f.check_box :state, {class: 'checkbox'}, :activate, :invalidate %>
+    <%= f.label :state %>
+  </label>
+<% end %>
+
+<%= f.submit class: "btn btn-primary" %>
+
+
+
+

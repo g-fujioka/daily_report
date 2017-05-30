@@ -32,7 +32,12 @@ ja:
         content: コメント
 
       department:
+        id: 部署ID
         department_name: 部署名
+        state: 有効化
+        status: 状態
+        activate: 有効
+        invalidate: 無効
 
   title:
     system_name: 日報システム
@@ -43,8 +48,10 @@ ja:
     user_update: ユーザー編集
     login: ログイン
     new_report: 新規投稿
-    new_user: 新規登録
+    new: 新規登録
     report_update: 日報編集
+    departments: 部署一覧
+    department_update: 部署編集
 
   info:
     create: 登録しました
