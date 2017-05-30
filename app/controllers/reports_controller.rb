@@ -3,7 +3,9 @@ class ReportsController < ApplicationController
   before_action :log_in?, only:[:index, :show]
 
   def index
-    @reports = Report.all.paginate(page: params[:page])
+    # @reports = Report.all.paginate(page: params[:page])
+    @q = Report.ransack(params[:q])
+    @reports = @q.result(distinct: true).paginate(page: params[:page])
   end
 
   def show
