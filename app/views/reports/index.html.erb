@@ -8,14 +8,7 @@
 
     <%= f.label :report_date_eq, t('activerecord.attributes.report.report_date') %>
     <%= f.search_field :report_date_eq, class:"form-control datepicker" %>
-    <script type="text/javascript">
-      $(document).ready(function(){
-        $('.datepicker').datepicker({
-          language: 'ja',
-          autoclose: true
-        });
-      });
-    </script>
+
     <%= f.label :title_cont, t('activerecord.attributes.report.title') %>
     <%= f.search_field :title_cont, class:'form-control' %>
 

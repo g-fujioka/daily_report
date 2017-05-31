@@ -26,6 +26,7 @@
       <tr>
         <td><%= comment.user.name %></td>
         <td><%= comment.content %></td>
+
         <% if current_user?(comment.user) %>
           <td><%= link_to t('helpers.submit.delete'), [@report, comment], method: :delete %></td>
         <% end %>
