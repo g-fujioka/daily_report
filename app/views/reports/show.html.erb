@@ -29,7 +29,7 @@
         <td><%= comment.content %></td>
         <td>
           <% if current_user?(comment.user) %>
-            <%= link_to t('helpers.submit.delete'), [@report, comment], method: :delete %><br>
+            <%= link_to t('helpers.submit.delete'), [@report, comment], method: :delete %>
           <% end %>
         </td>
       </tr>
