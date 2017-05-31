@@ -3,7 +3,7 @@ class DepartmentsController < ApplicationController
   before_action :admin_user
 
   def index
-    @departments = Department.paginate(page: params[:page])
+    @departments = Department.page(params[:page])
   end
 
   def new

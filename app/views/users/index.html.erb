@@ -1,7 +1,7 @@
 <% provide(:title, t('title.users')) %>
 <h1><%= t('title.users') %></h1>
 
-<%= will_paginate @users, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
+<%= paginate @users %>
 <div class="container">
   <table class="table table-bordered">
     <thead>
@@ -21,4 +21,4 @@
     <%= link_to t('title.new'), new_user_path, class: "btn btn-lg btn-primary" %>
   <% end %>
 </div>
-<%= will_paginate @users, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
+<%= paginate @users %>

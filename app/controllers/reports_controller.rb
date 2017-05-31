@@ -4,12 +4,12 @@ class ReportsController < ApplicationController
 
   def index
     @q = Report.ransack(params[:q])
-    @reports = @q.result(distinct: true).paginate(page: params[:page])
+    @reports = @q.result(distinct: true).page(params[:page])
   end
 
   def show
     @report = Report.find(params[:id])
-    @comments = Comment.where(report_id: params[:id])
+    @comments = @report.comments.page(params[:page])
     @comment = Comment.new
   end
 

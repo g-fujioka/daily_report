@@ -43,13 +43,13 @@ gem "jquery-rails"
 
 gem 'faker', '1.6.6'
 
-gem 'will_paginate',           '3.1.0'
-
 gem 'bootstrap-will_paginate', '0.0.10'
 
 gem 'enum_help'
 
 gem 'ransack'
+
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -33,7 +33,10 @@
       </tr>
     <% end %>
   </table>
+  <%= paginate @comments %>
 </div>
+
+
 
 <% unless current_user?(@report.user) %>
   <%= form_for([@report, @comment]) do |f| %>
