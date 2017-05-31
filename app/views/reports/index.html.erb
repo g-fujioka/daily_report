@@ -6,7 +6,7 @@
   <%= f.search_field :user_name_cont, class:'form-control' %>
 
   <%= f.label :report_date %>
-  <%= f.search_field :report_date_cont, class:'form-control' %>
+  <%= f.search_field :report_date_gteq, class:'form-control' %>
 
   <%= f.label :title %>
   <%= f.search_field :title_cont, class:'form-control' %>
@@ -18,9 +18,9 @@
 <table class="table table-striped table-bordered">
   <thead>
   <tr>
-    <th><%= t('activerecord.models.user') %></th>
+    <th><%= sort_link(@q, :user_name) %></th>
     <th><%= sort_link(@q, :report_date) %></th>
-    <th><%= t('activerecord.attributes.report.title') %></th>
+    <th><%= sort_link(@q, :title) %></th>
   </tr>
   </thead>
 
@@ -34,4 +34,4 @@
 </table>
 </div>
 
-<%= will_paginate @reports, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
+<%= paginate @reports %>
