@@ -1,12 +1,13 @@
 <% provide(:title, t('title.home')) %>
 <h1><%= t('title.home') %></h1>
+
 <div class="form-group">
   <%= search_form_for @q do |f| %>
     <%= f.label :user_name_cont, t('activerecord.models.user') %>
     <%= f.search_field :user_name_cont, class:'form-control' %>
 
-  <%= f.label :report_date_eq, t('activerecord.attributes.report.report_date') %>
-  <%= f.search_field :report_date_eq, class:"form-control datepicker" %>
+    <%= f.label :report_date_eq, t('activerecord.attributes.report.report_date') %>
+    <%= f.search_field :report_date_eq, class:"form-control datepicker" %>
     <script type="text/javascript">
       $(document).ready(function(){
         $('.datepicker').datepicker({
@@ -15,16 +16,17 @@
         });
       });
     </script>
-  <%= f.label :title_cont, t('activerecord.attributes.report.title') %>
-  <%= f.search_field :title_cont, class:'form-control' %>
+    <%= f.label :title_cont, t('activerecord.attributes.report.title') %>
+    <%= f.search_field :title_cont, class:'form-control' %>
 
-  <%= f.submit class: "btn btn-primary"%>
-<% end %>
+    <%= f.submit class: "btn btn-primary"%>
+  <% end %>
+</div>
 
 <div class="container">
   <table class="table table-striped table-bordered">
     <thead>
-      <tr class="info">
+      <tr class="success">
         <th><%= sort_link(@q, :user_name) %></th>
         <th><%= sort_link(@q, :report_date) %></th>
         <th><%= sort_link(@q, :title) %></th>

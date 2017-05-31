@@ -2,9 +2,9 @@
 
 <h1><%= @report.user.name + t('activerecord.models.report')%></h1>
 <div class="container">
-  <table class="table">
+  <table class="table table-bordered">
     <tr><th><%= t('activerecord.attributes.report.report_date')%></th><td><%= @report.report_date %></td></tr>
-  <tr><th><%= t('activerecord.attributes.report.title') %></th><td><%= @report.title %></td></tr>
+    <tr><th><%= t('activerecord.attributes.report.title') %></th><td><%= @report.title %></td></tr>
     <tr><th colspan="2"><%= t('activerecord.attributes.report.content') %></th></tr>
     <td colspan="2"><%= @report.content %></td>
     <% if current_user?(@report.user) %>
@@ -17,21 +17,18 @@
 </div>
 
 <div class="container">
-  <table class="table table-bordered">
-    <tr>
+  <table class="table table-bordered table-striped">
+    <tr class="success">
       <th><%= t('activerecord.models.user') %></th>
       <th><%= t('activerecord.models.comment') %></th>
-      <th></th>
     </tr>
     <% @comments.each do |comment| %>
       <tr>
         <td><%= comment.user.name %></td>
         <td><%= comment.content %></td>
-        <td>
-          <% if current_user?(comment.user) %>
-            <%= link_to t('helpers.submit.delete'), [@report, comment], method: :delete %>
-          <% end %>
-        </td>
+        <% if current_user?(comment.user) %>
+          <td><%= link_to t('helpers.submit.delete'), [@report, comment], method: :delete %></td>
+        <% end %>
       </tr>
     <% end %>
   </table>

@@ -1,11 +1,11 @@
 <% provide(:title, t('title.users')) %>
 <h1><%= t('title.users') %></h1>
 
-<%= paginate @users %>
-<div class="container">
-  <table class="table table-bordered">
+<div class="container col-md-6">
+  <%= paginate @users %>
+  <table class="table table-bordered table-striped">
     <thead>
-      <tr>
+      <tr class="success">
         <th><%= t('activerecord.models.user') %></th>
         <th><%= t('activerecord.attributes.department.department_name') %></th>
       </tr>
@@ -20,5 +20,6 @@
   <% if admin_user?(current_user) %>
     <%= link_to t('title.new'), new_user_path, class: "btn btn-lg btn-primary" %>
   <% end %>
+  <%= paginate @users %>
+  <div class="col-md6"></div>
 </div>
-<%= paginate @users %>
