@@ -1,53 +1,61 @@
 <% provide(:title, t('activerecord.models.report')) %>
-
 <h1><%= @report.user.name + t('activerecord.models.report')%></h1>
 <div class="container">
-  <table class="table table-bordered">
-    <tr><th><%= t('activerecord.attributes.report.report_date')%></th><td><%= @report.report_date %></td></tr>
-    <tr><th><%= t('activerecord.attributes.report.title') %></th><td><%= @report.title %></td></tr>
-    <tr><th colspan="2"><%= t('activerecord.attributes.report.content') %></th></tr>
-    <td colspan="2"><%= @report.content %></td>
-    <% if current_user?(@report.user) %>
-      <tr>
-        <td colspan="2"><%= link_to t('helpers.submit.edit'), edit_report_path %>
-          <%= link_to t('helpers.submit.delete'), @report, method: :delete, data: { confirm: t('info.delete?') } %></td>
+  <div class="row">
+    <table class="table table-bordered　">
+      <tr class="active">
+        <th><%= t('activerecord.attributes.report.report_date')%></th>
+        <td><%= @report.report_date %></td>
       </tr>
-    <% end %>
-  </table>
-</div>
-
-<div class="container">
-  <table class="table table-bordered table-striped">
-    <tr class="success">
-      <th><%= t('activerecord.models.user') %></th>
-      <th><%= t('activerecord.models.comment') %></th>
-    </tr>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.user.name %></td>
-        <td><%= comment.content %></td>
-
-        <% if current_user?(comment.user) %>
-          <td><%= link_to t('helpers.submit.delete'), [@report, comment], method: :delete %></td>
-        <% end %>
+      <tr class="active">
+        <th><%= t('activerecord.attributes.report.title') %></th>
+        <td><%= @report.title %></td>
       </tr>
+      <tr class="active">
+        <th colspan="2"><%= t('activerecord.attributes.report.content') %></th>
+      </tr>
+      <td colspan="2"><%= @report.content %></td>
+      <% if current_user?(@report.user) %>
+        <tr>
+          <td colspan="2">
+            <%= link_to t('helpers.submit.edit'), edit_report_path %>
+            <%= link_to t('helpers.submit.delete'), @report, method: :delete, data: { confirm: t('info.delete?') } %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <table class="table table-bordered table-striped">
+      <tr class="success">
+        <th><%= t('activerecord.models.user') %></th>
+        <th><%= t('activerecord.models.comment') %></th>
+      </tr>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= comment.user.name %></td>
+          <td><%= comment.content %></td>
+          <% if current_user?(comment.user) %>
+            <td><%= link_to t('helpers.submit.delete'), [@report, comment], method: :delete %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+    <%= paginate @comments %>
+
+    <% unless current_user?(@report.user) %>
+      <%= form_for([@report, @comment]) do |f| %>
+
+        <%= render 'shared/error_messages', object: @comment %>
+
+        <%= f.label :content %>
+        <%= f.text_area :content, class: 'form-control' %>
+
+        <%= f.hidden_field :user_id, value: current_user.id %>
+
+        <%= f.submit class: "btn btn-primary" %>
+      <% end %>
     <% end %>
-  </table>
-  <%= paginate @comments %>
+
+    <%= link_to t('link.back'), root_path %>
+  </div>
 </div>
-
-<% unless current_user?(@report.user) %>
-  <%= form_for([@report, @comment]) do |f| %>
-
-    <%= render 'shared/error_messages', object: @comment %>
-
-    <%= f.label :content %>
-    <%= f.text_area :content, class: 'form-control' %>
-
-    <%= f.hidden_field :user_id, value: current_user.id %>
-
-    <%= f.submit class: "btn btn-primary" %>
-  <% end %>
-<% end %>
-
-<%= link_to t('link.back'), root_path %>
