@@ -16,23 +16,26 @@
   </table>
 </div>
 
-
 <div class="container">
   <table class="table table-bordered">
-  <!-- コメントとコメントフォーム -->
-    <tr><th><%= t('activerecord.models.user') %></th><th><%= t('activerecord.models.comment') %></th><th></th></tr>
+    <tr>
+      <th><%= t('activerecord.models.user') %></th>
+      <th><%= t('activerecord.models.comment') %></th>
+      <th></th>
+    </tr>
     <% @comments.each do |comment| %>
       <tr>
         <td><%= comment.user.name %></td>
         <td><%= comment.content %></td>
         <td>
           <% if current_user?(comment.user) %>
-              <%= link_to t('helpers.submit.delete'), [@report, comment], method: :delete %><br>
+            <%= link_to t('helpers.submit.delete'), [@report, comment], method: :delete %>
           <% end %>
         </td>
       </tr>
     <% end %>
   </table>
+  <%= paginate @comments %>
 </div>
 
 <% unless current_user?(@report.user) %>

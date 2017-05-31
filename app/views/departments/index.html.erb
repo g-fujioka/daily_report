@@ -2,7 +2,6 @@
 
 <h1><%= t('title.departments') %></h1>
 
-<%= will_paginate @departments, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
 <div class="container">
   <table class="table table-bordered">
     <thead>
@@ -36,4 +35,4 @@
   <% end %>
 </div>
 
-<%= will_paginate @departments, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
+<%= paginate @departments %>

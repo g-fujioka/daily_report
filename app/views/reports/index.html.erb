@@ -1,21 +1,37 @@
 <% provide(:title, t('title.home')) %>
 <h1><%= t('title.home') %></h1>
+
+<%= search_form_for @q do |f| %>
+  <%= f.label :user_name_cont, t('activerecord.models.user') %>
+  <%= f.search_field :user_name_cont, class:'form-control' %>
+
+  <%= f.label :report_date_eq, t('activerecord.attributes.report.report_date') %>
+  <%= f.search_field :report_date_eq, class:"form-control datepicker" %>
+
+  <%= f.label :title_cont, t('activerecord.attributes.report.title') %>
+  <%= f.search_field :title_cont, class:'form-control' %>
+
+  <%= f.submit class: "btn btn-primary"%>
+<% end %>
+
 <div class="container">
-<table class="table table-bordered">
-  <thead>
-  <tr>
-    <th><%= t('activerecord.models.user') %></th>
-    <th><%= t('activerecord.attributes.report.report_date') %></th>
-    <th><%= t('activerecord.attributes.report.title') %></th>
-  </tr>
-  </thead>
-  <% @reports.each do |report| %>
-    <tr>
-      <td><%= link_to report.user.name, user_path(report.user) %></td>
-      <td><%= report.report_date %></td>
-      <td><%= link_to report.title, report_path(report) %></td>
-    </tr>
-  <% end %>
-</table>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th><%= sort_link(@q, :user_name) %></th>
+        <th><%= sort_link(@q, :report_date) %></th>
+        <th><%= sort_link(@q, :title) %></th>
+      </tr>
+    </thead>
+
+    <% @reports.each do |report| %>
+      <tr>
+        <td><%= link_to report.user.name, user_path(report.user) %></td>
+        <td><%= report.report_date %></td>
+        <td><%= link_to report.title, report_path(report) %></td>
+      </tr>
+    <% end %>
+  </table>
 </div>
-<%= will_paginate @reports, :previous_label => t('paginate.previous'), :next_label => t('paginate.next') %>
+
+<%= paginate @reports %>
