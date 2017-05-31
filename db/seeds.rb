@@ -22,10 +22,9 @@ end
 Report.create!(report_date: '2017-04-01', title: 'Hello', content: 'こんにちは', user_id: 1)
 users = User.order(:created_at).take(50)
 report_date = Date.today
-  users.each do |user|
-      report_date = report_date.tomorrow
-      title = Faker::Cat.breed
-      content = Faker::Lorem.sentence(5)
-    user.reports.create!(report_date: report_date, title: title, content: content)
-  end
-
+users.each do |user|
+  report_date = report_date.tomorrow
+  title = Faker::Cat.breed
+  content = Faker::Lorem.sentence(5)
+  user.reports.create!(report_date: report_date, title: title, content: content)
+end
