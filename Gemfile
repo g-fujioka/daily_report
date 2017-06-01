@@ -62,6 +62,7 @@ group :development, :test do
   gem 'sqlite3', '1.3.11'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'database_rewinder'
 end
 
 group :development do
