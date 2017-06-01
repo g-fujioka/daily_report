@@ -39,7 +39,7 @@ ja:
 
       department:
         id: 部署ID
-        department_name: 部署名
+        name: 部署名
         state: 状態
         activate: 有効
         invalidate: 無効

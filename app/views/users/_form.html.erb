@@ -7,7 +7,7 @@
 <%= f.email_field :email, class: 'form-control' %>
 
 <%= f.label :department_id %>
-<%= f.select(:department_id, Department.activate.map{|u| [u.department_name, u.id]},
+<%= f.select(:department_id, Department.activate.map{|u| [u.name, u.id]},
              {}, {class: 'form-control'}) %>
 
 <%= f.label :password %>
