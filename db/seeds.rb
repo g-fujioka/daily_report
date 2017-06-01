@@ -1,5 +1,5 @@
-Department.create!(department_name: "開発部", state: true)
-Department.create!(department_name: "事業企画部", state: true)
+Department.create!(name: "開発部", state: true)
+Department.create!(name: "事業企画部", state: true)
 
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",

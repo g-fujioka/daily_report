@@ -4,7 +4,7 @@
   <div class="row col-md-6">
     <table class="table">
       <tr><th><%= t('activerecord.attributes.user.email') %></th><td><%= @user.email %></td></tr>
-      <tr><th><%= t('activerecord.models.department') %></th><td><%= @user.department.department_name %></td></tr>
+      <tr><th><%= t('activerecord.models.department') %></th><td><%= @user.department.name %></td></tr>
       <td>
         <% if current_user?(@user) || admin_user?(current_user) %>
           <%= link_to t('helpers.submit.edit'), edit_user_path(@user) %>

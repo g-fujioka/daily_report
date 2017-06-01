@@ -7,13 +7,13 @@
       <thead>
         <tr class="success">
           <th><%= t('activerecord.models.user') %></th>
-          <th><%= t('activerecord.attributes.department.department_name') %></th>
+          <th><%= t('activerecord.attributes.department.name') %></th>
         </tr>
       </thead>
       <% @users.each do |user| %>
         <tr>
           <td><%= link_to user.name, user_path(user) %></td>
-          <td><%= user.department.department_name %></td>
+          <td><%= user.department.name %></td>
         </tr>
       <% end %>
     </table>

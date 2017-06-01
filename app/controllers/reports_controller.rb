@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
 
   def index
     @q = Report.ransack(params[:q])
-    @reports = @q.result(distinct: true).page(params[:page])
+    @reports = @q.result.page(params[:page])
   end
 
   def show
