@@ -61,6 +61,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'sqlite3', '1.3.11'
   gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
   gem 'factory_girl_rails'
   gem 'database_rewinder'
 end
