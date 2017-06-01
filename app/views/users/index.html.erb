@@ -1,24 +1,25 @@
 <% provide(:title, t('title.users')) %>
 <h1><%= t('title.users') %></h1>
-
-<%= paginate @users %>
 <div class="container">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th><%= t('activerecord.models.user') %></th>
-        <th><%= t('activerecord.attributes.department.department_name') %></th>
-      </tr>
-    </thead>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= link_to user.name, user_path(user) %></td>
-        <td><%= user.department.department_name %></td>
-      </tr>
+  <div class="row col-sm-8 col-sm-offset-2">
+    <%= paginate @users %>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr class="success">
+          <th><%= t('activerecord.models.user') %></th>
+          <th><%= t('activerecord.attributes.department.department_name') %></th>
+        </tr>
+      </thead>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.name, user_path(user) %></td>
+          <td><%= user.department.department_name %></td>
+        </tr>
+      <% end %>
+    </table>
+    <% if admin_user?(current_user) %>
+      <%= link_to t('title.new'), new_user_path, class: "btn btn-lg btn-primary" %>
     <% end %>
-  </table>
-  <% if admin_user?(current_user) %>
-    <%= link_to t('title.new'), new_user_path, class: "btn btn-lg btn-primary" %>
-  <% end %>
+      <%= paginate @users %>
+  </div>
 </div>
-<%= paginate @users %>
