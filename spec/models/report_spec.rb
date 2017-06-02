@@ -13,7 +13,7 @@ RSpec.describe Report, type: :model do
     it 'コメントを参照できること' do
       expect(report.comments).to include comment
     end
-    it '日報を削除するとコメントも削除すること' do
+    it '日報を削除するとコメントも削除されること' do
       expect { report.destroy }.to change { Comment.count }.by(-1)
     end
   end

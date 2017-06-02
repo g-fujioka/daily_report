@@ -14,10 +14,10 @@ RSpec.describe User, type: :model do
     it '日報を参照できること' do
       expect(user.reports).to include report
     end
-    it 'ユーザーを削除すると日報も削除すること' do
+    it 'ユーザーを削除すると日報も削除されること' do
       expect { user.destroy }.to change { Report.count }.by(-1)
     end
-    it 'ユーザーを削除するとコメントも削除すること' do
+    it 'ユーザーを削除するとコメントも削除されること' do
       expect { user.destroy }.to change { Comment.count }.by(-1)
     end
   end
