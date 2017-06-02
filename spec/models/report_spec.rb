@@ -72,4 +72,19 @@ RSpec.describe Report, type: :model do
       end
     end
   end
+
+  describe 'default scope' do
+    context 'created_at DESC' do
+      let(:department) { FactoryGirl.create(:department) }
+      let(:user) { FactoryGirl.create(:user, department: department) }
+      before do
+        ['2017-06-01 00:00:00', '2017-06-02 00:00:00', '2017-06-03 00:00:00'].each do |time|
+          FactoryGirl.create(:report, report_date: time, user: user, created_at: time)
+        end
+      end
+      it '作成日の降順にデータが表示されること' do
+        expect(Report.all.pluck(:id)).to eq Report.order('created_at DESC').pluck(:id)
+      end
+    end
+  end
 end
