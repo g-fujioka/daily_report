@@ -12,9 +12,7 @@ RSpec.describe User, type: :model do
       expect(user.department.name).to eq '開発部'
     end
     it '日報を参照できること' do
-      user.reports.each do |rep|
-        expect(report).to eq rep
-      end
+      expect(user.reports).to include report
     end
     it 'ユーザーを削除すると日報も削除すること' do
       expect { user.destroy }.to change { Report.count }.by(-1)
