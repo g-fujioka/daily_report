@@ -24,4 +24,19 @@ RSpec.describe Department, type: :model do
       end
     end
   end
+
+  describe 'state' do
+    context 'enumにactivateを定義している場合' do
+      let(:department) { FactoryGirl.build(:department) }
+      it 'activateメソッドが使えること' do
+        expect(department.activate?).to be true
+      end
+    end
+    context 'enumにinvalidateを定義している場合' do
+      let(:department) { FactoryGirl.build(:department, state: false) }
+      it 'invalidateメソッドが使えること' do
+        expect(department.invalidate?).to be false
+      end
+    end
+  end
 end
