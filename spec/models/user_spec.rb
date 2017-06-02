@@ -3,36 +3,36 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   context '正常に値が入っている場合' do
     let(:user) { FactoryGirl.create(:user) }
-    let(:report) { FactoryGirl.create(:report, user_id: user.id)}
-    let(:comment) { FactoryGirl.create(:comment, user_id: user.id, report_id: report.id)}
+    let!(:report) { FactoryGirl.create(:report, user_id: user.id) }
     it '値の検証が成功すること' do
       expect(user).to be_valid
     end
     it '部署名が取得できること' do
       expect(user.department.name).to eq '開発部'
     end
-    it '日報を作成できること' do
-      expect(report).to be_valid
-    end
-    it 'コメントを作成できること' do
-      expect(comment).to be_valid
-    end
-  end
-
-  context '名前が空白の場合' do
-    let(:user) { FactoryGirl.build(:user, name: '') }
-    it 'エラーになること' do
-      expect(user).to_not be_valid
-      expect(user).to have(1).errors_on(:name)
-    end
-    it 'エラーメッセージがセットされていること' do
-      expect(user.errors_on(:name)).to include('を入力してください')
+    it '日報を参照できること' do
+      user.reports.each do |rep|
+        expect(report).to eq rep
+      end
     end
   end
 
-  describe 'メールアドレスについて' do
-    context '空白の場合' do
-      let(:user) { FactoryGirl.build(:user, email: '')}
+  describe 'name' do
+    context '名前が空白の場合' do
+      let(:user) { FactoryGirl.build(:user, name: '') }
+      it 'エラーになること' do
+        expect(user).to_not be_valid
+        expect(user).to have(1).errors_on(:name)
+      end
+      it 'エラーメッセージがセットされていること' do
+        expect(user.errors_on(:name)).to include('を入力してください')
+      end
+    end
+  end
+
+  describe 'email' do
+    context 'メールアドレスが空白の場合' do
+      let(:user) { FactoryGirl.build(:user, email: '') }
       it 'エラーになること' do
         expect(user).to_not be_valid
         expect(user).to have(2).errors_on(:email)
@@ -42,8 +42,8 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context '最大文字数が255を超えている場合' do
-      email = "a" * 255 + "@example.com"
+    context 'メールアドレスの文字数が256文字以上の場合' do
+      email = 'a' * 250 + '@e.com'
       let(:user) { FactoryGirl.build(:user, email: email)}
       it 'エラーになること' do
         expect(user).to_not be_valid
@@ -54,9 +54,17 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'フォーマットが違う場合' do
+    context 'メールアドレスの文字数が255文字以内の場合' do
+      email = 'a' * 249 + '@e.com'
+      let(:user) { FactoryGirl.build(:user, email: email) }
+      it '値の検証が成功すること' do
+        expect(user).to be_valid
+      end
+    end
+
+    context 'メールアドレスのフォーマットが違う場合' do
       let(:user) { FactoryGirl.build(:user, email: 'cat@examplecom')}
-      it "エラーになること" do
+      it 'エラーになること' do
         expect(user).to_not be_valid
         expect(user).to have(1).errors_on(:email)
       end
@@ -65,7 +73,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context '既に存在する場合' do
+    context 'メールアドレスが既に存在する場合' do
       let(:department) { FactoryGirl.create(:department) }
       before do
         FactoryGirl.create(:user, department: department)
@@ -81,8 +89,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'パスワードについて' do
-    context '空白の場合' do
+  describe 'password' do
+    context 'パスワードが空白の場合' do
       let(:user) { FactoryGirl.build(:user, password: '') }
       it 'エラーになること' do
         expect(user).to_not be_valid
@@ -93,7 +101,14 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context '文字数が6文字未満の場合' do
+    context 'パスワードの文字数が6文字以上の場合' do
+      let(:user) { FactoryGirl.build(:user, password: 'foobaa') }
+      it '値の検証が成功すること' do
+        expect(user).to be_valid
+      end
+    end
+
+    context 'パスワードの文字数が6文字未満の場合' do
       let(:user) { FactoryGirl.build(:user, password: 'fooba') }
       it 'エラーになること' do
         expect(user).to_not be_valid
@@ -114,13 +129,13 @@ RSpec.describe User, type: :model do
         expect(user.errors_on(:password_confirmation)).to include('とパスワードの入力が一致しません')
       end
     end
+  end
 
+  describe '.digest' do
+    subject { User.digest('foobar') }
     context '入力したパスワードが違う場合' do
       let(:user) { FactoryGirl.create(:user) }
-      let(:digest) { User.digest('foobar') }
-      it 'パスワードダイジェストが異なること' do
-        expect(user.password_digest).to_not eq digest
-      end
+      it { is_expected.to_not eq user.password_digest}
     end
   end
 end
