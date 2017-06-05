@@ -93,7 +93,6 @@ RSpec.describe 'Users', type: :request do
     end
   end
 
-
   describe 'GET /users/:id/edit' do
     context '管理者権限を持っている場合' do
       before do
