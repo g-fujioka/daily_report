@@ -35,7 +35,6 @@ RSpec.describe 'Sessions', type: :request do
     end
 
     context 'パスワードが空白の場合' do
-
       it 'ログインに失敗すること' do
         post login_path, params: { session: { email: user.email, password: '' } }
         expect(response).to_not have_http_status(302)
