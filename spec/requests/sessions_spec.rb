@@ -9,9 +9,17 @@ RSpec.describe 'Sessions', type: :request do
     end
 
     context '正しい値を入力したとき' do
-      it 'ログインに成功すること' do
+      before do
         post login_path, params: { session: { email: user.email, password: user.password } }
+      end
+      it 'ログインに成功すること' do
         expect(response).to have_http_status(302)
+      end
+      it 'session[user_id]にログインしたユーザーのIDが入っていること' do
+      expect(controller.session[:user_id]).to eq user.id
+      end
+      it 'current_userにログインしたユーザーが入っていること' do
+        expect(controller.current_user).to eq user
       end
     end
 
