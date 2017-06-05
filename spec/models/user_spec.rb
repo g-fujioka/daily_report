@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   context '正常に値が入っている場合' do
     let(:user) { FactoryGirl.create(:user) }
     let!(:report) { FactoryGirl.create(:report, user_id: user.id) }
+    let!(:comment) { FactoryGirl.create(:comment, user_id: user.id, report_id: report.id) }
     it '値の検証が成功すること' do
       expect(user).to be_valid
     end
@@ -11,9 +12,13 @@ RSpec.describe User, type: :model do
       expect(user.department.name).to eq '開発部'
     end
     it '日報を参照できること' do
-      user.reports.each do |rep|
-        expect(report).to eq rep
-      end
+      expect(user.reports).to include report
+    end
+    it 'ユーザーを削除すると日報も削除されること' do
+      expect { user.destroy }.to change { Report.count }.by(-1)
+    end
+    it 'ユーザーを削除するとコメントも削除されること' do
+      expect { user.destroy }.to change { Comment.count }.by(-1)
     end
   end
 
