@@ -41,10 +41,18 @@ RSpec.describe 'Sessions', type: :request do
 
   describe 'Delete /logout' do
     context 'ログアウトボタンを押したとき' do
-      it 'ログイン画面にリダイレクトすること' do
+      before do
         post login_path, params: { session: { email: user.email, password: user.password } }
         delete logout_path
+      end
+      it 'ログイン画面にリダイレクトすること' do
         expect(response).to redirect_to login_url
+      end
+      it 'session[user_id]がnilになること' do
+        expect(controller.session[:user_id]).to be_nil
+      end
+      it 'current_userがnilになること' do
+        expect(controller.current_user).to be_nil
       end
     end
   end
