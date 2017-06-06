@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Reports', type: :request do
   let!(:user) { FactoryGirl.create(:user, department: department) }
-  let!(:user2) { FactoryGirl.create(:user, email: 'cat2@example.com', department: department) }
+  let!(:other_user) { FactoryGirl.create(:user, email: 'cat2@example.com', department: department) }
   let(:department) { FactoryGirl.create(:department) }
   let!(:report) { FactoryGirl.create(:report, user: user) }
 
@@ -78,7 +78,7 @@ RSpec.describe 'Reports', type: :request do
                 report_date: '2017-04-02',
                 title: 'sample',
                 content: 'sample content',
-                user_id: user2.id
+                user_id: other_user.id
             }
         }
       end
@@ -107,7 +107,7 @@ RSpec.describe 'Reports', type: :request do
 
     context '現在のユーザーが他のユーザーの日報を編集する場合' do
       before do
-        post login_path, params: { session: { email: user2.email, password: user2.password } }
+        post login_path, params: { session: { email: other_user.email, password: other_user.password } }
       end
       it 'ホーム画面にリダイレクトされること' do
         get edit_report_path report
@@ -124,7 +124,7 @@ RSpec.describe 'Reports', type: :request do
     context '現在のユーザーが自分の日報を更新する場合' do
       before do
         post login_path, params: { session: { email: user.email, password: user.password } }
-        patch report_path report, report: FactoryGirl.attributes_for(:report, title: 'test')
+        patch report_path report, report: FactoryGirl.attributes_for(:report, title: 'test', user_id: user)
         report.reload
       end
       it '日報情報を更新できること' do
@@ -140,8 +140,8 @@ RSpec.describe 'Reports', type: :request do
 
     context '現在のユーザーが他のユーザーの日報を更新する場合' do
       before do
-        post login_path, params: { session: { email: user2.email, password: user2.password } }
-        patch report_path report, report: FactoryGirl.attributes_for(:report, title: 'test')
+        post login_path, params: { session: { email: user.email, password: user.password } }
+        patch report_path report, report: FactoryGirl.attributes_for(:report, user_id: other_user.id)
         report.reload
       end
         it 'ホーム画面にリダイレクトされること' do
@@ -169,7 +169,7 @@ RSpec.describe 'Reports', type: :request do
 
     context '現在のユーザーが他のユーザーの日報を削除する場合' do
       before do
-        post login_path, params: { session: { email: user2.email, password: user2.password } }
+        post login_path, params: { session: { email: other_user.email, password: other_user.password } }
       end
       it 'ホーム画面にリダイレクトされること' do
         delete report_path report
