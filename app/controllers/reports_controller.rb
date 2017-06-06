@@ -36,8 +36,9 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if current_user.id.to_s == params[:report][:user_id]
-      if @report.update_attributes(report_params)
+    @report.attributes = report_params
+    if current_user.id == @report.user_id
+      if @report.save
         flash[:success] = t('info.update')
         redirect_to @report
       else
@@ -48,7 +49,6 @@ class ReportsController < ApplicationController
       flash[:info] = t('errors.messages.correct_user')
     end
   end
-
 
   def destroy
     @report.destroy
