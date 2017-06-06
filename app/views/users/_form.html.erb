@@ -18,7 +18,7 @@
 
 <% if admin_user?(current_user) %>
     <label class="checkbox-inline">
-      <%= f.check_box :admin, {class: 'checkbox'}, false, true %>
+      <%= f.check_box :admin, {class: 'checkbox'}, true, false %>
       <%= f.label :admin %>
     </label>
 <% end %>
