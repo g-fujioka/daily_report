@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_report, only: [:edit, :update, :destroy]
   before_action :log_in?, only: [:index, :show, :new]
 
   def index
@@ -62,7 +62,7 @@ class ReportsController < ApplicationController
     params.require(:report).permit(:report_date, :title, :content, :user_id)
   end
 
-  def correct_user
+  def set_report
     @report = current_user.reports.find_by(id: params[:id])
     if @report.nil?
       redirect_to root_url
