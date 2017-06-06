@@ -1,7 +1,6 @@
 class ReportsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :log_in?, only: [:index, :show, :new]
-  before_action :check_id, only: [:create]
 
   def index
     @q = Report.ransack(params[:q])
@@ -19,11 +18,17 @@ class ReportsController < ApplicationController
   end
 
   def create
-    if @report.save
-      flash[:info] = t('info.post')
-      redirect_to @report
+    @report = Report.new(report_params)
+    if current_user.id == @report.user_id
+      if @report.save
+        flash[:info] = t('info.post')
+        redirect_to @report
+      else
+        render 'reports/new'
+      end
     else
-      render 'reports/new'
+      redirect_to root_url
+      flash[:info] = t('errors.messages.correct_user')
     end
   end
 
@@ -31,13 +36,19 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if @report.update_attributes(report_params)
-      flash[:success] = t('info.update')
-      redirect_to @report
+    if current_user.id.to_s == params[:report][:user_id]
+      if @report.update_attributes(report_params)
+        flash[:success] = t('info.update')
+        redirect_to @report
+      else
+        render 'reports/edit'
+      end
     else
-      render 'reports/edit'
+      redirect_to root_url
+      flash[:info] = t('errors.messages.correct_user')
     end
   end
+
 
   def destroy
     @report.destroy
@@ -54,14 +65,6 @@ class ReportsController < ApplicationController
   def correct_user
     @report = current_user.reports.find_by(id: params[:id])
     if @report.nil?
-      redirect_to root_url
-      flash[:info] = t('errors.messages.correct_user')
-    end
-  end
-
-  def check_id
-    @report = Report.new(report_params)
-    unless current_user.id == @report.user_id
       redirect_to root_url
       flash[:info] = t('errors.messages.correct_user')
     end
