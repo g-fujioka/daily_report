@@ -1,6 +1,7 @@
 class ReportsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
-  before_action :log_in?, only:[:index, :show]
+  before_action :log_in?, only: [:index, :show, :new]
+  before_action :check_id, only: [:create]
 
   def index
     @q = Report.ransack(params[:q])
@@ -18,7 +19,6 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = Report.new(report_params)
     if @report.save
       flash[:info] = t('info.post')
       redirect_to @report
@@ -28,7 +28,6 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    @report = Report.find(params[:id])
   end
 
   def update
@@ -54,6 +53,17 @@ class ReportsController < ApplicationController
 
   def correct_user
     @report = current_user.reports.find_by(id: params[:id])
-    redirect_to root_url if @report.nil?
+    if @report.nil?
+      redirect_to root_url
+      flash[:info] = t('errors.messages.correct_user')
+    end
+  end
+
+  def check_id
+    @report = Report.new(report_params)
+    unless current_user.id == @report.user_id
+      redirect_to root_url
+      flash[:info] = t('errors.messages.correct_user')
+    end
   end
 end
