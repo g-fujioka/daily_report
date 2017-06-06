@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :correct_user, only: [:edit, :destroy]
+  before_action :set_comment, only: [:edit, :destroy]
 
   def create
     @report = Report.find(params[:report_id])
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
   end
 
   # 正しいユーザー確認
-  def correct_user
+  def set_comment
     @comment = current_user.comments.find_by(id: params[:id])
     redirect_to root_url if @comment.nil?
   end

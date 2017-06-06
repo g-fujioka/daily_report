@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :correct_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update]
   before_action :log_in?, only: [:index, :show]
   before_action :admin_user, only: [:new, :create, :destroy]
 
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   end
 
   # 正しいユーザーか確認
-  def correct_user
+  def set_user
     @user = User.find(params[:id])
     unless current_user?(@user) || admin_user?(current_user)
       redirect_to request.referrer || root_url
