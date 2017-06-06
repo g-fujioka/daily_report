@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  let(:admin_user) { FactoryGirl.create(:user, department: department) }
-  let(:user) { FactoryGirl.create(:user, email: 'cat2@example.com', admin: false, department: department) }
+  let!(:admin_user) { FactoryGirl.create(:user, department: department) }
+  let!(:user) { FactoryGirl.create(:user, email: 'cat2@example.com', admin: false, department: department) }
   let(:department) { FactoryGirl.create(:department) }
 
   describe 'GET /users' do
@@ -180,7 +180,6 @@ RSpec.describe 'Users', type: :request do
     context '管理者権限を持っている場合' do
       before do
         post login_path, params: { session: { email: admin_user.email, password: admin_user.password } }
-        user
       end
       it 'ユーザーが削除できること' do
         expect { delete user_path user }.to change { User.count }.by(-1)
@@ -194,7 +193,6 @@ RSpec.describe 'Users', type: :request do
     context '管理者権限を持っていない場合' do
       before do
         post login_path, params: { session: { email: user.email, password: user.password } }
-        admin_user
       end
       it 'ユーザーが削除できないこと' do
         expect { delete user_path admin_user }.to change { User.count }.by(0)
