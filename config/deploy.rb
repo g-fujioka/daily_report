@@ -18,12 +18,6 @@ set :keep_releases, 10
 set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 set :unicorn_config_path, "#{release_path}/config/unicorn.rb"
 
-set :ssh_options, {
-    keys: %w(~/.ssh/id_rsa),
-    forward_agent: false,
-    auth_methods: %w(publickey)
-}
-
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do

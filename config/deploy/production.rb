@@ -6,7 +6,9 @@ set :rails_env, 'production'
 set :branch, 'master'
 set :migration_role, 'db'
 set :ssh_options, {
-    keys: [File.expand_path('~/.ssh/id_rsa.pem)')]
+    keys: %w(~/.ssh/id_rsa),
+    forward_agent: false,
+    auth_methods: %w(publickey)
 }
 
 namespace :deploy do
