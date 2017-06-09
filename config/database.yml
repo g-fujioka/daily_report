@@ -24,4 +24,4 @@ production:
   <<: *default
   database: g-fujioka
   user: g-fujioka
-  host: localhost
+  host: ""
