@@ -7,11 +7,11 @@
 default: &default
   adapter: postgresql
   user: gfujioka
-  host: localhost
 
 development:
   <<: *default
   database: development_daily_report
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -19,9 +19,9 @@ development:
 test:
   <<: *default
   database: test_daily_report
+  host: localhost
 
 production:
   <<: *default
   database: g-fujioka
   user: g-fujioka
-  host: ""
