@@ -22,14 +22,14 @@
           <th><%= sort_link(@q, :user_name) %></th>
           <th><%= sort_link(@q, :report_date) %></th>
           <th><%= sort_link(@q, :title) %></th>
+          <th><%= t('activerecord.models.comment') %></th>
         </tr>
       </thead>
 
       <% @reports.each do |report| %>
         <tr>
           <td><%= link_to report.user.name, user_path(report.user) %></td>
-          <td><%= report.report_date %></td>
-          <td><%= link_to report.title, report_path(report) %></td>
+          <%= render 'shared/report', {report: report} %>
         </tr>
       <% end %>
     </table>
