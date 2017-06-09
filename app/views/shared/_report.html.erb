@@ -1,0 +1,7 @@
+<td><%= report.report_date %></td>
+<td>
+  <%= link_to report.title, report_path(report) %>
+  <% if report.comments.count != 0 %>
+    <span class="badge pull-right badge-red"><%= report.comments.count %></span>
+  <% end %>
+</td>
