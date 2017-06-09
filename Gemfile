@@ -54,6 +54,8 @@ gem 'kaminari'
 gem 'bootstrap-datepicker-rails'
 
 gem 'pg', '0.18.4'
+gem 'unicorn'
+gem 'therubyracer'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -65,6 +67,11 @@ group :development, :test do
   gem 'rspec-collection_matchers'
   gem 'factory_girl_rails'
   gem 'database_rewinder'
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv', '~> 2.0'
+  gem 'capistrano3-unicorn'
 end
 
 group :development do
