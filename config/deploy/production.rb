@@ -3,10 +3,9 @@ set :unicorn_pid, "/home/g-fujioka/#{fetch(:application)}/shared/tmp/pids/unicor
 set :unicorn_rack_env, 'production'
 set :unicorn_config_path, "/home/g-fujioka/#{fetch(:application)}/current/config/unicorn.rb"
 set :rails_env, 'production'
-set :branch, 'master'
+set :branch, 'feature-capistrano'
 set :migration_role, 'db'
 set :ssh_options, {
-    keys: %w(~/.ssh/id_rsa),
     forward_agent: false,
     auth_methods: %w(publickey)
 }
